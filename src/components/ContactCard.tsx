@@ -7,6 +7,20 @@ import {
 import { Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
+export const SocialLinks = () => {
+  return (
+    <div className="flex gap-2 justify-center">
+      {socialLink.map((i) => (
+        <Link to={i.link} key={i.name}>
+          <div className="p-2 bg-black/10 dark:bg-white/10 hover:dark:bg-white/20 hover:bg-black/40 backdrop-blur-sm rounded-md">
+            {i.icon}
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+};
+
 const ContactCard = () => {
   return (
     <div>
@@ -26,16 +40,8 @@ const ContactCard = () => {
           </Link>
         ))}
       </div>
-      <div className="flex gap-2 justify-center">
-        {socialLink.map((i) => (
-          <Link to={i.link} key={i.name}>
-            <div className="p-2 bg-black/10 dark:bg-white/10 hover:dark:bg-white/20 hover:bg-black/40 backdrop-blur-sm rounded-md">
-              {i.icon}
-            </div>
-          </Link>
-        ))}
-      </div>
-    </div>
+    <SocialLinks/>
+   </div>
   );
 };
 
