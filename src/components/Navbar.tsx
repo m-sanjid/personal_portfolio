@@ -1,32 +1,40 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Sun, Moon, Menu, X } from "lucide-react";
+import { motion } from "motion/react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const location = useLocation();
+  const [isHovered, setIsHovered] = useState(false);
+  const [hoverPosition, setHoverPositon] = useState({ left: 0, width: 0 });
 
   const toggleTheme = () => {
     setIsDark(!isDark);
     document.documentElement.classList.toggle("dark");
   };
 
-  const navItems = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About" },
-    { path: "/projects", label: "Projects" },
-    { path: "/blog", label: "Blog" },
-    { path: "/contact", label: "Contact" },
-  ];
-
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
+  const handleHover = (e: any) => {
+    const { offsetLeft, offsetWidth } = e.target;
+    setHoverPositon({ left: offsetLeft, width: offsetWidth });
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
     <div className="relative flex justify-center">
-      <nav className="fixed top-4 w-full max-w-7xl rounded-lg z-50 bg-black/10 dark:bg-white/20 backdrop-blur-sm shadow-xl">
+      <nav
+        className="fixed top-4 w-full max-w-7xl rounded-lg z-50 bg-black/10 dark:bg-white/20 backdrop-blur-sm shadow-xl"
+        onMouseLeave={handleMouseLeave}
+      >
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="text-xl font-semibold">
@@ -39,14 +47,12 @@ const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`transition-colors hover:text-primary border-b group relative py-1 px-2 hover:bg-accent rounded-lg ${
-                    location.pathname === item.path
+                  onMouseEnter={handleHover}
+                  className={`transition-colors z-20 hover:text-primary relative py-1 px-2 rounded-lg ${location.pathname === item.path
                       ? "text-primary font-medium"
                       : "text-muted-foreground"
-                  }`}
+                    }`}
                 >
-                  <span className="absolute inset-x-0 -bottom-px opacity-0 group-hover:opacity-100 bg-gradient-to-r from-neutral-700 via-cyan-600 to-neutral-600 h-px w-3/4 mx-auto" />
-                  <span className="absolute inset-x-0 -bottom-0 opacity-0  group-hover:opacity-100 bg-gradient-to-r from-neutral-700 via-cyan-600 to-neutral-600 h-px w-full blur-sm mx-auto" />
                   {item.label}
                 </Link>
               ))}
@@ -57,6 +63,20 @@ const Navbar = () => {
               >
                 {isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
+              {/* Hover Effect */}
+              {isHovered && (
+                <motion.div
+                  className="absolute p-4 z-10 bg-black/10 rounded-lg"
+                  initial={false}
+                  animate={{
+                    left: hoverPosition.left,
+                    width: hoverPosition.width,
+                    opacity: 1,
+                  }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                />
+              )}
             </div>
 
             {/* Mobile Navigation */}
@@ -86,11 +106,10 @@ const Navbar = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`block py-2 transition-colors ${
-                      location.pathname === item.path
+                    className={`block py-2 transition-colors ${location.pathname === item.path
                         ? "text-primary font-medium"
                         : "text-muted-foreground"
-                    }`}
+                      }`}
                   >
                     {item.label}
                   </Link>
@@ -105,3 +124,11 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+export const navItems = [
+  { path: "/", label: "Home" },
+  { path: "/about", label: "About" },
+  { path: "/projects", label: "Projects" },
+  { path: "/blog", label: "Blog" },
+  { path: "/contact", label: "Contact" },
+];
