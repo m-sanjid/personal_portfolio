@@ -4,7 +4,7 @@ import { navItems } from "./Navbar";
 const Footer = () => {
   return (
     <div className="border-t mt-10 p-4 max-w-5xl mx-auto flex flex-col items-center gap-3">
-      <h1 className="font-semibold text-xl">Muhammed Sanjid</h1>
+      <h1 className="font-semibold text-xl pb-4">Muhammed Sanjid</h1>
       <ul className="flex gap-3 text-sm pb-3">
         {navItems.map((i) => (
           <li
@@ -15,7 +15,7 @@ const Footer = () => {
           </li>
         ))}
       </ul>
-      <p className="text-sm text-muted-foreground">
+      <p className="text-sm text-muted-foreground py-4">
         &copy; Personal Portfolio.All rights reserved
       </p>
       <div className="mt-2">

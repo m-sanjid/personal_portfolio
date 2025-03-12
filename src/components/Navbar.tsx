@@ -19,6 +19,7 @@ const Navbar = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleHover = (e: any) => {
     const { offsetLeft, offsetWidth } = e.target;
     setHoverPositon({ left: offsetLeft, width: offsetWidth });
