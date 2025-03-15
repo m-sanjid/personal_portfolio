@@ -1,9 +1,5 @@
-import {
-  IconChevronRight,
-  IconStar,
-  IconStarFilled,
-} from "@tabler/icons-react";
-import { Dispatch, SetStateAction, useState } from "react";
+import { IconChevronRight } from "@tabler/icons-react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import MeteorLine from "./BeamBorder";
 import AnimatedStars from "./AnimatedStars";
@@ -39,10 +35,10 @@ export const TestCard = ({
     <div
       onMouseEnter={() => setActiveCard(id)}
       onMouseLeave={() => setActiveCard(id)}
-      className={`h-[432px] max-w-4xl mx-auto rounded-lg shadow-xl relative duration-600 ease-in-out bg-gradient-to-tr from-neutral-200 dark:from-black via-neutral-500 transition-all dark:via-white/5 to-blue-100 dark:to-black ${isActive ? "w-[432px] pl-12 pt-12 bg-vignette bg-dot-grid border dark:bg-black " : "w-[100px] p-4 "}`}
+      className={`h-[432px] max-w-4xl mx-auto rounded-lg shadow-xl relative duration-600 ease-in-out bg-gradient-to-tr from-neutral-200 dark:from-black via-neutral-500 transition-all dark:via-white/5 to-blue-100 dark:to-black ${isActive ? "md:w-[432px] md:pl-12 md:pt-12 bg-vignette bg-dot-grid border dark:bg-black " : "w-[100px] p-4 "}`}
     >
       <div
-        className={` h-full ${isActive ? "bg-black/5 dark:bg-white/5 backdrop-blur-sm rounded-tl-2xl rounded-br-2xl border-t border-l" : ""}`}
+        className={` h-full ${isActive ? "bg-black/5 dark:bg-white/5 backdrop-blur-sm rounded-tl-lg rounded-br-lg rounded-lg border-t border-l" : ""}`}
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.9, rotate: -10 }}
@@ -61,13 +57,13 @@ export const TestCard = ({
             transition={{ duration: 0.3, ease: "easeInOut", delay: 0.5 }}
           >
             <div className="mt-2">
-              <div className="p-4 text-sm">{des}</div>
+              <div className="p-2 md:p-4 text-xs md:text-sm">{des}</div>
               <AnimatedStars rating={rating} />
             </div>
             <MeteorLine />
             <div className=" w-full p-4 absolute bottom-0 rounded-br-2xl">
               <div className="p-4 text-lg font-semibold">{name}</div>
-              <div className="absolute bottom-3 right-3 dark:bg-white/20 bg-black/10 backdrop-blur-md rounded-lg p-4 perspective-midrange transform-3d">
+              <div className="absolute bottom-3 right-3 dark:bg-white/20 bg-black/10 backdrop-blur-md rounded-lg md:p-4 perspective-midrange transform-3d">
                 <a href={social ?? "https://linkedin.com/"} target="_blank">
                   <motion.img
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -81,11 +77,11 @@ export const TestCard = ({
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     src={pic}
                     alt={name}
-                    className="w-16 h-16 rounded-lg mx-auto"
+                    className="w-12 h-12 md:w-16 md:h-16 rounded-lg mx-auto"
                   />
                 </a>
               </div>
-              <div className="flex gap-2 items-end px-4 dark:text-muted-foreground">
+              <div className="md:flex gap-2 items-end px-4 dark:text-muted-foreground">
                 <div>{role} | </div>
                 <a href={companyUrl ?? "#"} target="_blank" className="text-sm">
                   {company}
@@ -105,9 +101,21 @@ export const TestCard = ({
 
 const AnimatedTestimonials = () => {
   const [activeCard, setActiveCard] = useState(1);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div className="flex gap-3 justify-center items-center min-h-screen">
+    <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory justify-center items-center min-h-screen">
       {testimonials.map((t) => (
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -125,7 +133,7 @@ const AnimatedTestimonials = () => {
             social={t.social}
             companyUrl={t.companyUrl}
             rating={t.rating || 5}
-            isActive={activeCard === t.id}
+            isActive={isSmallScreen || activeCard === t.id}
             setActiveCard={setActiveCard}
           />
         </motion.div>
