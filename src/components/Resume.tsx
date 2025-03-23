@@ -22,6 +22,7 @@ import {
 import { useState } from "react";
 import { SocialLinks } from "./ContactCard";
 import Project from "@/pages/Project";
+import AboutMe from "./AboutMe";
 
 const Experience = () => {
   return (
@@ -126,11 +127,7 @@ const Resume = () => {
   return (
     <div className="min-h-screen w-full max-w-5xl mx-auto">
       <div className="flex justify-center items-center flex-col gap-6 my-4 bg-black/10 dark:bg-white/10 backdrop-blur-md rounded-md p-6">
-        <div className="text-3xl font-semibold">Muhammed Sanjid</div>
-        <p className="max-w-xl text-center font-light">
-          Full-stack developer with expertise in modern web technologies and
-          passionate for creatign elegant, effective solutions
-        </p>
+       <div><AboutMe/></div>
         <div className="flex gap-4">
           <button
             className="px-4 py-2 backdrop-blur-lg bg-white/10 rounded-md flex gap-2 hover:bg-black/20"
@@ -150,7 +147,7 @@ const Resume = () => {
               <button
                 key={i.id}
                 onClick={() => setActiveTab(i.id)}
-                className={`p-4 hover:bg-black/20 mx-3 rounded-md cursor-pointer ${activeTab == i.id ? "dark:bg-white/30 bg-black/30" : "bg-white/10"}`}
+                className={`p-1 text-xs md:text-lg md:p-4 hover:bg-black/20 md:mx-3 rounded-md cursor-pointer ${activeTab == i.id ? "dark:bg-white/30 bg-black/30" : "bg-white/10"}`}
               >
                 {i.label}
               </button>

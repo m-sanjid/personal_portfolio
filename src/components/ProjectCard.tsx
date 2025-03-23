@@ -57,6 +57,7 @@ const ProjectCard = ({
           >
             <a
               href={liveLink}
+              target="_blank"
               className="flex gap-2 hover:bg-neutral-700 px-3 py-1 rounded-lg font-medium text-neutral-200"
             >
               <span>Live Demo</span>
@@ -64,6 +65,7 @@ const ProjectCard = ({
             </a>
             <a
               href={githubUrl}
+              target="_blank"
               className="flex gap-2 hover:bg-neutral-700 px-3 py-1 rounded-lg font-medium text-neutral-200"
             >
               View Code

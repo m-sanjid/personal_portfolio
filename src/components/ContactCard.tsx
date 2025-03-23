@@ -40,8 +40,8 @@ const ContactCard = () => {
           </Link>
         ))}
       </div>
-    <SocialLinks/>
-   </div>
+      <SocialLinks />
+    </div>
   );
 };
 
