@@ -20,6 +20,7 @@ type FormValues = z.infer<typeof formSchema>;
 const MessageForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -39,19 +40,34 @@ const MessageForm = () => {
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setSubmitError(null);
 
-    console.log("Form submitted:", data);
+    try {
+      const response = await fetch("http://localhost:3001/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
-    form.reset();
+      const result = await response.json();
 
-    // Reset success message after 3 seconds
-    setTimeout(() => {
-      setSubmitSuccess(false);
-    }, 3000);
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send email");
+      }
+
+      console.log("Email sent successfully:", result);
+      setSubmitSuccess(true);
+      form.reset();
+
+      setTimeout(() => setSubmitSuccess(false), 3000);
+    } catch (error: any) {
+      console.error("Error sending email:", error);
+      setSubmitError(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -91,6 +107,12 @@ const MessageForm = () => {
         {submitSuccess && (
           <div className="bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-300 p-3 rounded-md text-center mt-4">
             Thank you! Your message has been sent successfully.
+          </div>
+        )}
+
+        {submitError && (
+          <div className="bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300 p-3 rounded-md text-center mt-4">
+            {submitError}
           </div>
         )}
       </form>
