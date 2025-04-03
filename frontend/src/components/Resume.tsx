@@ -122,6 +122,17 @@ const handleDownloadResume = () => {
   window.open(driveDownloadLink, "_blank");
 };
 
+export const ResumeButton = ({className="bg-white/10 hover:bg-black/20 dark:bg-black/10 dark:hover:bg-white/20"}:{className?:string}) => {
+  return (
+    <button
+      className={`px-4 py-2 backdrop-blur-lg rounded-md flex gap-2  ${className}`}
+      onClick={handleDownloadResume}
+    >
+      <IconFileTextFilled /> Download CV{" "}
+    </button>
+  );
+};
+
 const Resume = () => {
   const [activeTab, setActiveTab] = useState("experience");
   return (
@@ -129,12 +140,7 @@ const Resume = () => {
       <div className="flex justify-center items-center flex-col gap-6 my-4 bg-black/10 dark:bg-white/10 backdrop-blur-md rounded-md p-6">
        <div><AboutMe/></div>
         <div className="flex gap-4">
-          <button
-            className="px-4 py-2 backdrop-blur-lg bg-white/10 rounded-md flex gap-2 hover:bg-black/20"
-            onClick={handleDownloadResume}
-          >
-            <IconFileTextFilled /> Download CV{" "}
-          </button>
+          <ResumeButton/>
           <div>
             <SocialLinks />
           </div>
