@@ -137,5 +137,6 @@ export const navItems = [
   { path: "/about", label: "About" },
   { path: "/projects", label: "Projects" },
   { path: "/blog", label: "Blog" },
+  { path: "/snippets", label: "Snippets" },
   { path: "/contact", label: "Contact" },
 ];
