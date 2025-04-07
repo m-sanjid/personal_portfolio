@@ -25,9 +25,9 @@ interface SkillCategoryProps {
   skills: Skill[];
 }
 
-const SkillsSection = () => {
+const SkillsSection = ({ id }: { id: string }) => {
   return (
-    <section id="skills" className="my-20">
+    <section id={id} className="my-20">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -37,7 +37,6 @@ const SkillsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">My Skills</h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             I've worked with a variety of technologies in the web development world.
             Here are the main tools and technologies I use to bring ideas to life.
@@ -74,7 +73,6 @@ const SkillsSection = () => {
               { name: "Docker", icon: <SiDocker className="text-[#2496ED]" size={24} /> },
               { name: "RESTful APIs", icon: <ApiIcon size={24} /> },
               { name: "CI/CD", icon: <CiCdIcon size={24} /> },
-              { name: "Testing", icon: <TestingIcon size={24} /> },
             ]} 
           />
         </div>
@@ -90,7 +88,7 @@ const SkillCategory = ({ title, skills }: SkillCategoryProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="bg-white/10 dark:bg-black/20 backdrop-blur-md rounded-lg p-6"
+      className="bg-card backdrop-blur-md rounded-lg p-6"
     >
       <h3 className="text-xl font-bold mb-6 pb-2 border-b">{title}</h3>
       <div className="space-y-3">
@@ -99,9 +97,10 @@ const SkillCategory = ({ title, skills }: SkillCategoryProps) => {
             key={skill.name}
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.05,zIndex: 1 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="flex items-center gap-3 py-3 px-6 hover:bg-black/5 dark:hover:bg-white/5 transition-colors border-b"
+            className="flex items-center gap-3 py-3 px-6 hover:bg-black/5 hover:rounded-md dark:hover:bg-white/5 transition-colors border-b"
           >
                 {skill.icon}
             <span>{skill.name}</span>

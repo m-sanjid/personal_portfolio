@@ -29,7 +29,7 @@ export const SocialLinks = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="absolute text-nowrap -top-8 left-0 py-px px-2 text-xs bg-black/5 dark:bg-white/5 backdrop-blur-sm rounded-md">
+                className="absolute text-nowrap -top-8 left-0 py-px px-2 text-xs bg-primary/10 backdrop-blur-sm rounded-md">
                 {i.name}
               </motion.div>
             )}
