@@ -10,7 +10,7 @@ import { motion } from "motion/react";
 import { githubFetch } from "@/lib/githubFetch";
 import { GitHubData } from "@/types/github";
 import { formatDate } from "@/lib/formatDate";
-import CardSeleton from "./CardSeleton";
+import CardSkeleton from "./CardSkeleton";
 import { AnimatedButton } from "./AnimatedButton";
 
 export function GitHubProjects() {
@@ -27,8 +27,10 @@ export function GitHubProjects() {
         } else {
           setError(response.error);
         }
-      } catch (err: any) {
-        setError(`Error loading GitHub projects: ${err?.message}`);
+      } catch (err: unknown) {
+        setError(
+          `Error loading GitHub projects: ${err instanceof Error ? err.message : "Unknown error"}`,
+        );
       } finally {
         setIsLoading(false);
       }
@@ -38,7 +40,7 @@ export function GitHubProjects() {
   }, []);
 
   if (isLoading) {
-    return <CardSeleton />;
+    return <CardSkeleton />;
   }
 
   if (error) {
