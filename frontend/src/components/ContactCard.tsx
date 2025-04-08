@@ -1,82 +1,87 @@
-import {
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconBrandWhatsapp,
-  IconBrandX,
-} from "@tabler/icons-react";
-import { Mail, Phone } from "lucide-react";
-import { Link } from "react-router-dom";
-import { motion } from "motion/react";
+
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { IconMail, IconPhone } from "@tabler/icons-react";
+import SocialLinks from "./SocialLinks";
 
-export const SocialLinks = () => {
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
-  return (
-    <div className="flex gap-2 justify-center">
-      {socialLink.map((i, index) => (
-        <Link to={i.link} key={i.name}>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            onMouseEnter={() => setHoverIndex(index)}
-            onMouseLeave={() => setHoverIndex(null)}
-            className="relative p-2 bg-black/10 dark:bg-white/10 hover:dark:bg-white/20 hover:bg-black/40 backdrop-blur-sm rounded-md">
-            {i.icon}
-            {hoverIndex === index && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="absolute text-nowrap -top-8 left-0 py-px px-2 text-xs bg-primary/10 backdrop-blur-sm rounded-md">
-                {i.name}
-              </motion.div>
-            )}
-          </motion.div>
-        </Link>
-      ))}
-    </div>
-  );
-};
 
 const ContactCard = () => {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
   return (
-    <div>
-      <h3 className="text-2xl font-bold">Contact Information</h3>
-      <p className="text-muted-foreground">
-        Feel free to reach out through any of the following channels. I'm always
-        open to discussing new projects, creative ideas, or opportunities to be
-        part of your vision.
-      </p>
-      <div className="mb-10">
-        {contactItems.map((i, index) => (
-          <Link to={i.link ?? ""} key={i.name}>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+    <div className="p-6 backdrop-blur-sm">
+      <motion.h3 
+        className="text-2xl font-bold mb-4"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        Contact Information
+      </motion.h3>
+      
+      <motion.p 
+        className="text-muted-foreground mb-8"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+       Feel free to reach out if you're looking for a developer, have a question, or just want to connect.
+      </motion.p>
+      
+      <div className="mb-10 space-y-4">
+        {contactItems.map((item, index) => (
+          <motion.div
+            key={item.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.15 + 0.2 }}
+            className="relative overflow-hidden"
+          >
+            <motion.a
+              href={item.link} target="_blank" rel="noopener noreferrer"
+              whileTap={{ scale: 0.98 }}
+              className="group p-4 overflow-hidden bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 backdrop-blur-sm rounded-lg border border-neutral-200/20 dark:border-neutral-800/20 flex items-center gap-4"
               onMouseEnter={() => setHoverIndex(index)}
               onMouseLeave={() => setHoverIndex(null)}
-              className="p-5 overflow-hidden bg-black/10 dark:bg-white/10 hover:dark:bg-white/20 hover:bg-black/40 backdrop-blur-sm rounded-md flex gap-4 my-6">
-              <div>{i.icon}</div>
-              {i.value}
-              {hoverIndex === index && (
+            >
+              <div className="p-3 bg-primary/10 text-primary rounded-full transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                {item.icon}
+              </div>
+              
+              <div className="flex-grow">
+                <h4 className="font-medium opacity-70 text-sm">{item.name}</h4>
+                <div className="font-medium">{item.value}</div>
+              </div>
+              
+            </motion.a>
+            
+            <AnimatePresence>
+              {hoverIndex === index && item.hover && item.link && (
                 <motion.div
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 }}
-                  className="absolute text-nowrap top-0 bottom-0 right-0 w-[10rem] flex gap-3 items-center justify-center bg-neutral-700 dark:bg-neutral-200 text-white dark:text-black rounded-md">
-                  {i.icon}{i.hover}
+                  initial={{ opacity: 0, x: 20, width: 0 }}
+                  animate={{ opacity: 1, x: 0, width: "auto" }}
+                  exit={{ opacity: 0, x: 20, width: 0 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="absolute text-nowrap top-0 right-0 h-full flex items-center gap-2 px-4 bg-black text-white rounded-r-lg overflow-hidden"
+                >
+                  <span>{item.hover}</span>
+                  {item.icon}
                 </motion.div>
               )}
-            </motion.div>
-          </Link>
+            </AnimatePresence>
+          </motion.div>
         ))}
       </div>
-      <SocialLinks />
+      
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+      >
+        <h4 className="font-medium mb-4 text-center">Connect with me</h4>
+        <SocialLinks />
+      </motion.div>
     </div>
   );
 };
@@ -84,40 +89,22 @@ const ContactCard = () => {
 export default ContactCard;
 
 const phone = import.meta.env.VITE_PHONE;
-console.log(phone, "phone");
 
 const contactItems = [
   {
     name: "email",
     link: "mailto:contact@sanjid.in",
-    icon: <Mail className="w-6 h-6" />,
+    icon: <IconMail className="w-6 h-6" />,
     value: "contact@sanjid.in",
     hover: "Email me",
   },
   {
-    name: "whatsapp",
-    link: `https://api.whatsapp.com/send?phone=91${phone}&text=Hi%20how%20are%20you?`,
-    icon: <IconBrandWhatsapp className="w-6 h-6" />,
-    value: `Chat on Whatsapp`,
-    hover: "Chat now",
+    name: "phone",
+    link: `tel:${phone}`,
+    icon: <IconPhone className="w-6 h-6" />,
+    value: `+91 ${phone ?? ""}`,
+    hover: "Call me",
   },
-  { name: "phone", icon: <Phone className="w-6 h-6" />, value: `+91 ${phone ?? ""}`, hover: "Call me" },
 ];
 
-const socialLink = [
-  {
-    name: "github",
-    icon: <IconBrandGithub />,
-    link: "https://github.com/m-sanjid",
-  },
-  {
-    name: "x",
-    icon: <IconBrandX />,
-    link: "https://x.com/sanjid357",
-  },
-  {
-    name: "linkedin",
-    icon: <IconBrandLinkedin />,
-    link: "https://www.linkedin.com/in/muhammedsanjid1/",
-  },
-];
+

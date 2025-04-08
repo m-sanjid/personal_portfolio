@@ -1,11 +1,11 @@
 import ContactCard from "@/components/ContactCard";
 import MessageForm from "@/components/MessageForm";
 
-const Contact = () => {
+const Contact = ({ id }: { id: string }) => {
   return (
     <div
-      id="contact"
-      className="max-w-4xl mx-auto w-full bg-black/10 backdrop-blur-sm p-4 rounded-md dark:bg-white/10"
+      id={id}
+      className="max-w-4xl mx-auto w-full backdrop-blur-sm p-4 rounded-md"
     >
       <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
         Get In Touch
