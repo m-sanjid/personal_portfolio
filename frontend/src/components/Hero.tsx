@@ -1,8 +1,9 @@
 import { AnimatedButton } from "./AnimatedButton";
-import { SocialLinks } from "./ContactCard";
+import SocialLinks from "./SocialLinks";
 import { ResumeButton } from "./Resume";
 import Typewriter from "./Typewriter";
 import { motion } from "motion/react";
+import Image from "./Image";
 
 const Hero = () => {
   return (
@@ -28,8 +29,9 @@ const Hero = () => {
             </motion.div>
           </div>
           <div>
-            {/* TODO: Replace with pic */}
-            <div className="p-4 h-20 w-20 bg-black border-4 border-red-600 top-0 right-0 md:absolute"></div>
+            <div className="p-1 flex justify-center items-center h-26 w-26 bg-black border-2 top-0 right-0 md:absolute rounded-lg">
+              <Image />
+            </div>
           </div>
         </div>
         <div className="mt-4 p-4">
@@ -44,8 +46,16 @@ const Hero = () => {
             focus on user experience and clean code.
           </motion.p>{" "}
           <div className="flex gap-4 items-center justify-center">
-            <AnimatedButton className="bg-primary text-secondary rounded-md border" label="Get in Touch" to="/contact" />
-            <AnimatedButton className="bg-secondary rounded-md" label="View My Work" to="/projects" />
+            <AnimatedButton
+              className="bg-primary text-secondary rounded-md border"
+              label="Get in Touch"
+              to="/contact"
+            />
+            <AnimatedButton
+              className="bg-secondary rounded-md"
+              label="View My Work"
+              to="/projects"
+            />
           </div>
           <motion.div
             initial={{ opacity: 0 }}
