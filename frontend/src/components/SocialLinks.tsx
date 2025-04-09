@@ -65,19 +65,19 @@ const socialLink = [
       name: "GitHub",
       icon: <IconBrandGithub />,
       link: "https://github.com/m-sanjid",
-      color: "#24292e"
+      color: "#000000"
     },
     {
       name: "Twitter",
       icon: <IconBrandX />,
       link: "https://x.com/sanjid357",
-      color: "#24292e"
+      color: "#000000"
     },
     {
       name: "Linkedin",
       icon: <IconBrandLinkedin />,
       link: "https://www.linkedin.com/in/muhammedsanjid1/",
-      color: "#0077B5"
+      color: "#0B66C2"
     },{
       name: "WhatsApp",
       link: `https://api.whatsapp.com/send?phone=91${phone}&text=Hi%20how%20are%20you?`,

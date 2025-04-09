@@ -8,29 +8,38 @@ type Props = {
   inputType?: string;
   error?: string;
   name?: string;
-  onChange?: (e: any) => void;
-  onBlur?: (e: any) => void;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
+  onBlur?: (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
 };
 
 const InputBox = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
-  ({ placeholder, label, type = "small", inputType = "text", error, ...rest }, ref) => {
+  (
+    { placeholder, label, type = "small", inputType = "text", error, ...rest },
+    ref,
+  ) => {
     const [isFocused, setIsFocused] = useState(false);
-    
+
     const handleFocus = () => setIsFocused(true);
-    const handleBlur = (e: any) => {
+    const handleBlur = (
+      e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
       setIsFocused(false);
       if (rest.onBlur) rest.onBlur(e);
     };
 
     const inputVariants = {
-      focused: { 
-        scale: 1.01, 
+      focused: {
+        scale: 1.01,
         borderRadius: "10px",
         boxShadow: "0 4px 16px rgba(0, 0, 0, 0.08)",
         borderColor: "var(--color-primary)",
       },
-      unfocused: { 
-        scale: 1, 
+      unfocused: {
+        scale: 1,
         borderRadius: "10px",
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
         borderColor: "var(--border-color)",
@@ -40,13 +49,21 @@ const InputBox = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
         borderRadius: "10px",
         boxShadow: "0 2px 8px rgba(220, 38, 38, 0.1)",
         borderColor: "rgb(220, 38, 38)",
-      }
+      },
     };
 
     const labelVariants = {
-      focused: { color: "var(--color-primary)", x: 4, transition: { duration: 0.2 } },
-      unfocused: { color: "var(--text-color)", x: 0, transition: { duration: 0.2 } },
-      error: { color: "rgb(220, 38, 38)", x: 0, transition: { duration: 0.2 } }
+      focused: {
+        color: "var(--color-primary)",
+        x: 4,
+        transition: { duration: 0.2 },
+      },
+      unfocused: {
+        color: "var(--text-color)",
+        x: 0,
+        transition: { duration: 0.2 },
+      },
+      error: { color: "rgb(220, 38, 38)", x: 0, transition: { duration: 0.2 } },
     };
 
     const getVariant = () => {
@@ -57,14 +74,14 @@ const InputBox = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
 
     return (
       <div className="space-y-1">
-        <motion.label 
+        <motion.label
           variants={labelVariants}
           animate={getVariant()}
           className="block text-sm font-medium ml-1 transition-colors duration-200"
         >
           {label}
         </motion.label>
-        
+
         <motion.div
           variants={inputVariants}
           animate={getVariant()}
@@ -92,11 +109,11 @@ const InputBox = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
             />
           )}
         </motion.div>
-        
+
         <AnimatedError error={error} />
       </div>
     );
-  }
+  },
 );
 
 const AnimatedError = ({ error }: { error?: string }) => {

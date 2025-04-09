@@ -33,7 +33,7 @@ const Typewriter = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="text-xl font-mono flex items-center"
+      className="sm:text-xl md:text-2xl font-mono flex items-center"
     >
       {displayedText}
       <motion.span

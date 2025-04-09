@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import Logo from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
   const location = useLocation();
   const [isHovered, setIsHovered] = useState(false);
   const [hoverPosition, setHoverPositon] = useState({ left: 0, width: 0 });
@@ -15,11 +16,6 @@ const Navbar = () => {
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 0);
   });
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle("dark");
-  };
 
   useEffect(() => {
     setIsOpen(false);
@@ -44,10 +40,7 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="flex items-center justify-between h-16">
-            <Link to="/" className="text-xl font-semibold">
-              MS
-            </Link>
-
+            <Logo />
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
@@ -55,21 +48,16 @@ const Navbar = () => {
                   key={item.path}
                   to={item.path}
                   onMouseEnter={handleHover}
-                  className={`transition-colors z-20 hover:text-primary relative py-1 px-2 rounded-lg ${location.pathname === item.path
+                  className={`transition-colors z-20 hover:text-primary relative py-1 px-2 rounded-lg ${
+                    location.pathname === item.path
                       ? "text-primary font-medium"
                       : "text-muted-foreground"
-                    }`}
+                  }`}
                 >
                   {item.label}
                 </Link>
               ))}
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-full hover:bg-accent transition-colors"
-                aria-label="Toggle theme"
-              >
-                {isDark ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
+              <ThemeToggle />
               {/* Hover Effect */}
               {isHovered && (
                 <motion.div
@@ -88,13 +76,7 @@ const Navbar = () => {
 
             {/* Mobile Navigation */}
             <div className="md:hidden flex items-center">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-full hover:bg-accent transition-colors mr-2"
-                aria-label="Toggle theme"
-              >
-                {isDark ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
+              <ThemeToggle />
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2 rounded-full hover:bg-accent transition-colors"
@@ -113,10 +95,11 @@ const Navbar = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`block py-2 transition-colors ${location.pathname === item.path
+                    className={`block py-2 transition-colors ${
+                      location.pathname === item.path
                         ? "text-primary font-medium"
                         : "text-muted-foreground"
-                      }`}
+                    }`}
                   >
                     {item.label}
                   </Link>

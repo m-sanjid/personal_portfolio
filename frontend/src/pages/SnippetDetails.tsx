@@ -10,10 +10,10 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 import { getSnippetBySlug, getAllSnippets } from "@/lib/loadSnippets";
 import ReactSyntaxHighlighter from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { Snippet } from "@/types";
 import Sidebar from "@/components/Sidebar";
 import { AnimatedButton } from "@/components/AnimatedButton";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const TABS = ["Preview", "Code", "Usage", "Props", "Examples"];
 
@@ -22,7 +22,7 @@ const SnippetDetails = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Preview");
   const [copied, setCopied] = useState(false);
-  const [snippet, setSnippet] = useState<Snippet | null>(null);
+  const [snippet, setSnippet] = useState<Snippet | undefined>(undefined);
   const [relatedSnippets, setRelatedSnippets] = useState<Snippet[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -61,7 +61,7 @@ const SnippetDetails = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="w-full max-w-5xl ml-64 mx-auto p-4 flex items-center justify-center h-64"
+        className="w-full max-w-5xl md:ml-64 mx-auto p-4 flex items-center justify-center h-64"
       >
         <div className="animate-pulse flex space-x-4">
           <div className="rounded-full bg-gray-200 dark:bg-gray-700 h-12 w-12"></div>
@@ -82,7 +82,7 @@ const SnippetDetails = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="w-full max-w-5xl ml-64 mx-auto p-4"
+        className="w-full max-w-5xl md:ml-64 mx-auto p-4"
       >
         <div className="mb-6">
           <motion.button
@@ -117,12 +117,12 @@ const SnippetDetails = () => {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar currentSlug={slug} />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-5xl ml-64 mx-auto p-4"
+        className="w-full max-w-5xl md:ml-68 mx-auto p-4"
       >
         {/* Back button and header */}
         <div className="mb-6">
@@ -229,16 +229,16 @@ const SnippetDetails = () => {
             className="mb-12"
           >
             {activeTab === "Preview" && (
-              <div className="p-8 flex justify-center items-center border border-neutral-200 dark:border-neutral-800 rounded-lg bg-white dark:bg-neutral-900">
+              <div className="p-8 flex justify-center h-[26rem] items-center border border-neutral-200 dark:border-neutral-800 rounded-lg bg-white dark:bg-neutral-900">
                 {Demo && <Demo />}
               </div>
             )}
 
             {activeTab === "Code" && (
-              <div className="relative h-96 overflow-auto p-2 border rounded-2xl">
+              <div className="relative h-[26rem] bg-neutral-500 w-full max-w-4xl mx-auto overflow-auto p-2 border rounded-2xl">
                 <ReactSyntaxHighlighter
                   language={snippet.language || "tsx"}
-                  style={docco}
+                  style={dracula}
                   showLineNumbers
                   wrapLines
                   customStyle={{
@@ -254,28 +254,28 @@ const SnippetDetails = () => {
             )}
 
             {activeTab === "Usage" && (
-              <div className="relative">
-                <pre className="p-4 bg-neutral-100 dark:bg-neutral-800 rounded-lg overflow-auto max-h-96">
+              <div className="relative h-[26rem]">
+                <pre className="p-4 bg-card rounded-lg overflow-auto max-h-96">
                   <code className="text-sm font-mono">{snippet.usage}</code>
                 </pre>
               </div>
             )}
 
             {activeTab === "Props" && (
-              <div className="border border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden">
-                <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-800">
-                  <thead className="bg-neutral-50 dark:bg-neutral-850">
+              <div className="border border-neutral-200  dark:border-neutral-800 rounded-lg overflow-auto">
+                <table className="min-w-full divide-y divide-muted-foreground">
+                  <thead className="bg-neutral-50 dark:bg-neutral-900">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                         Prop
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                         Type
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                         Default
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                         Description
                       </th>
                     </tr>
@@ -305,16 +305,13 @@ const SnippetDetails = () => {
             )}
 
             {activeTab === "Examples" && (
-              <div className="space-y-8">
+              <div className="space-y-8 h-[20rem] overflow-auto">
                 {snippet.examples?.map((example, idx) => (
-                  <div
-                    key={idx}
-                    className="border border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden"
-                  >
-                    <div className="p-4 bg-neutral-50 dark:bg-neutral-850 border-b border-neutral-200 dark:border-neutral-800">
+                  <div key={idx} className="border rounded-lg overflow-auto">
+                    <div className="p-4 bg-neutral-50 dark:bg-neutral-900 border-b">
                       <h3 className="font-medium">{example.title}</h3>
                     </div>
-                    <pre className="p-4 bg-neutral-100 dark:bg-neutral-800 overflow-auto">
+                    <pre className="p-4 bg-card overflow-auto">
                       <code className="text-sm font-mono">{example.code}</code>
                     </pre>
                   </div>
@@ -332,12 +329,12 @@ const SnippetDetails = () => {
               <a
                 href={`/snippets/${relatedSnippet.slug}`}
                 key={relatedSnippet.slug}
-                className="border border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden hover:border-blue-300 dark:hover:border-blue-700 transition-colors"
+                className="border rounded-lg overflow-hidden hover:border-blue-300 dark:hover:border-blue-700 transition-colors"
               >
-                <div className="p-4 border-b border-neutral-200 dark:border-neutral-800">
+                <div className="p-4 border-b">
                   <h3 className="font-medium">{relatedSnippet.title}</h3>
                 </div>
-                <div className="p-4 h-32 flex items-center justify-center bg-neutral-50 dark:bg-neutral-900">
+                <div className="p-4 h-44 flex items-center justify-center bg-card">
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}

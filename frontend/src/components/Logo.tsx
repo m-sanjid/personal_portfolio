@@ -16,7 +16,7 @@ const Logo = () => {
     <Link to="/">
       <img
         src={!isDark ? "/logoDark.png" : "/logo.png"}
-        className="w-10 h-10 object-contain"
+        className="w-10 h-10 object-cover"
         alt="LOGO"
         onLoad={() => setImageLoaded(true)}
         onError={handleImageError}
