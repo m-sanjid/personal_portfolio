@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+const code = `import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import Logo from "./Logo";
@@ -35,7 +35,7 @@ const Navbar = () => {
   return (
     <div className="relative flex justify-center">
       <nav
-        className={`fixed top-4 w-full z-50 ${isScrolled ? "rounded-lg bg-white/80 dark:bg-black/80 backdrop-blur-xl mx-10 max-w-4xl duration-300 ease-in-out px-10" : "max-w-7xl"}`}
+        className={isScrolled ? "rounded-lg bg-white/80 dark:bg-black/80 backdrop-blur-xl mx-10 max-w-4xl duration-300 ease-in-out px-10" : "max-w-7xl"} fixed top-4 w-full z-50 }
         onMouseLeave={handleMouseLeave}
       >
         <div className="container mx-auto px-4 max-w-6xl">
@@ -48,11 +48,11 @@ const Navbar = () => {
                   key={item.path}
                   to={item.path}
                   onMouseEnter={handleHover}
-                  className={`transition-colors z-20 hover:text-primary relative py-1 px-2 rounded-lg ${
+                  className={transition-colors z-20 hover:text-primary relative py-1 px-2 rounded-lg {
                     location.pathname === item.path
                       ? "text-primary font-medium"
                       : "text-muted-foreground"
-                  }`}
+                  }}
                 >
                   {item.label}
                 </Link>
@@ -95,11 +95,11 @@ const Navbar = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`block py-2 transition-colors ${
+                    className={block py-2 transition-colors {
                       location.pathname === item.path
                         ? "text-primary font-medium"
                         : "text-muted-foreground"
-                    }`}
+                    }}
                   >
                     {item.label}
                   </Link>
@@ -123,3 +123,6 @@ export const navItems = [
   { path: "/snippets", label: "Snippets" },
   { path: "/contact", label: "Contact" },
 ];
+`;
+
+export default code;

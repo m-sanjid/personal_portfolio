@@ -1,5 +1,5 @@
 import { forwardRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 type Props = {
   placeholder: string;
@@ -31,18 +31,21 @@ const InputBox = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
       if (rest.onBlur) rest.onBlur(e);
     };
 
+    // Instead of using CSS variables for animation targets, use explicit values
     const inputVariants = {
       focused: {
         scale: 1.01,
         borderRadius: "10px",
         boxShadow: "0 4px 16px rgba(0, 0, 0, 0.08)",
-        borderColor: "var(--color-primary)",
+        // Use a specific color here that will be used during animations
+        borderColor: "#3B82F6", // Example blue color, replace with your primary color
       },
       unfocused: {
         scale: 1,
         borderRadius: "10px",
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
-        borderColor: "var(--border-color)",
+        // Use a specific color here rather than a CSS variable
+        borderColor: "hsl(0 0% 80%)", // Light border color for light mode
       },
       error: {
         scale: 1,
@@ -54,12 +57,12 @@ const InputBox = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
 
     const labelVariants = {
       focused: {
-        color: "var(--color-primary)",
+        color: "#3B82F6", // Example blue color, replace with your primary color
         x: 4,
         transition: { duration: 0.2 },
       },
       unfocused: {
-        color: "var(--text-color)",
+        color: "hsl(0 0% 20%)", // Dark text color
         x: 0,
         transition: { duration: 0.2 },
       },
@@ -86,6 +89,13 @@ const InputBox = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
           variants={inputVariants}
           animate={getVariant()}
           transition={{ duration: 0.2 }}
+          // Add style to handle the CSS variable application for non-animated states
+          style={{
+            // This applies the CSS variables for normal styling but won't be used in animations
+            // Framer will use the explicit values from the variants above
+            "--border-color": "hsl(0 0% 80%)",
+            "--color-primary": "#3B82F6",
+          } as React.CSSProperties}
         >
           {type === "small" ? (
             <input

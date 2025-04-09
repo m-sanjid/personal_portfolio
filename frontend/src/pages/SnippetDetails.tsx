@@ -9,11 +9,9 @@ import {
 } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
 import { getSnippetBySlug, getAllSnippets } from "@/lib/loadSnippets";
-import ReactSyntaxHighlighter from "react-syntax-highlighter";
 import { Snippet } from "@/types";
 import Sidebar from "@/components/Sidebar";
 import { AnimatedButton } from "@/components/AnimatedButton";
-import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const TABS = ["Preview", "Code", "Usage", "Props", "Examples"];
 
@@ -33,9 +31,7 @@ const SnippetDetails = () => {
         setSnippet(loadedSnippet);
         const relatedSnippets = await getAllSnippets();
         setRelatedSnippets(
-          relatedSnippets
-            .filter((snippet) => snippet.slug !== slug)
-            .slice(0, 3),
+          relatedSnippets.filter((snippet) => snippet.slug !== slug).slice(0, 3)
         );
         console.log("Loaded snippet:", loadedSnippet);
       } catch (err) {
@@ -229,27 +225,16 @@ const SnippetDetails = () => {
             className="mb-12"
           >
             {activeTab === "Preview" && (
-              <div className="p-8 flex justify-center h-[26rem] items-center border border-neutral-200 dark:border-neutral-800 rounded-lg bg-white dark:bg-neutral-900">
+              <div className="py-8 px-4 flex justify-center h-[26rem] items-center border border-neutral-200 dark:border-neutral-800 rounded-lg bg-white dark:bg-neutral-900 overflow-auto max-w-4xl mx-auto">
                 {Demo && <Demo />}
               </div>
             )}
 
             {activeTab === "Code" && (
               <div className="relative h-[26rem] bg-neutral-500 w-full max-w-4xl mx-auto overflow-auto p-2 border rounded-2xl">
-                <ReactSyntaxHighlighter
-                  language={snippet.language || "tsx"}
-                  style={dracula}
-                  showLineNumbers
-                  wrapLines
-                  customStyle={{
-                    margin: 0,
-                    background: "transparent",
-                    padding: "1rem",
-                    borderRadius: "0.5rem",
-                  }}
-                >
-                  {snippet.code}
-                </ReactSyntaxHighlighter>
+                <pre className="whitespace-pre-wrap font-mono text-sm text-white">
+                  <code>{snippet.code}</code>
+                </pre>
               </div>
             )}
 

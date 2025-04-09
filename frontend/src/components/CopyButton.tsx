@@ -1,5 +1,6 @@
+import { IconCheck, IconClipboard } from "@tabler/icons-react";
 import { useState } from "react";
-import { Clipboard, Check } from "lucide-react";
+
 
 export default function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
@@ -15,7 +16,7 @@ export default function CopyButton({ text }: { text: string }) {
       onClick={handleCopy}
       className="absolute cursor-pointer top-2 right-2 bg-white dark:bg-neutral-700 rounded shadow px-2 py-1"
     >
-      {copied ? <Check size={16} /> : <Clipboard size={16} />}
+      {copied ? <IconCheck size={16} /> : <IconClipboard size={16} />}
     </button>
   );
 }

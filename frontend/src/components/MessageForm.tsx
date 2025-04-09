@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion, AnimatePresence } from "framer-motion";
-import { Send, Check, AlertCircle, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import z from "zod";
 import InputBox from "./InputBox";
 import { AnimatedButton } from "./AnimatedButton";
+import { IconAlertCircle, IconCheck, IconLoader2, IconSend } from "@tabler/icons-react";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -155,7 +155,7 @@ const MessageForm = () => {
             type="submit"
             className="w-full bg-primary text-secondary rounded-lg" 
             label={`${isSubmitting ? "Sending..." : "Send Message"}`} 
-            logo={isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />  } />
+            logo={isSubmitting ? <IconLoader2 size={18} className="animate-spin" /> : <IconSend size={18} />  } />
         </motion.div>
 
         {/* Success and error messages */}
@@ -169,7 +169,7 @@ const MessageForm = () => {
               className="absolute -bottom-10 flex items-center gap-3 bg-green-100/80 dark:bg-green-900/30 text-green-800 dark:text-green-300 p-3 rounded-lg"
             >
               <div className="p-1 bg-green-200 dark:bg-green-800/50 rounded-full">
-                <Check size={16} className="text-green-700 dark:text-green-200" />
+                <IconCheck size={16} className="text-green-700 dark:text-green-200" />
               </div>
               <p>Thank you! Your message has been sent successfully.</p>
             </motion.div>
@@ -184,7 +184,7 @@ const MessageForm = () => {
               className="absolute -bottom-4 flex items-center gap-3 bg-red-100/80 dark:bg-red-900/30 text-red-800 dark:text-red-300 p-3 rounded-lg"
             >
               <div className="p-1 bg-red-200 dark:bg-red-800/50 rounded-full">
-                <AlertCircle size={16} className="text-red-700 dark:text-red-200" />
+                <IconAlertCircle size={16} className="text-red-700 dark:text-red-200" />
               </div>
               <p>{submitError}</p>
             </motion.div>

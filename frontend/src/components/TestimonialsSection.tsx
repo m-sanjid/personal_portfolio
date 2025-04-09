@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useAnimationControls } from "motion/react";
-import { User, Quote } from "lucide-react";
 import { testimonials } from "@/lib/Constants";
+import { IconQuote, IconUser } from "@tabler/icons-react";
 
 
 const TestimonialsSection = () => {
@@ -89,7 +89,7 @@ const TestimonialsSection = () => {
                     </div>
                     {/* Quote icon */}
                     <div className="absolute -top-2 -right-2 text-primary">
-                      <Quote size={60} />
+                      <IconQuote size={60} />
                     </div>
 
                        {/* Testimonial content */}
@@ -115,7 +115,7 @@ const TestimonialsSection = () => {
                           <div className="relative">
                             <div className="absolute inset-0 bg-primary/30 rounded-full blur-md"></div>
                             <div className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center border-2 border-white dark:border-slate-700 relative">
-                              <User size={20} className="text-primary" />
+                              <IconUser size={20} className="text-primary" />
                             </div>
                           </div>
                         {/* )} */}

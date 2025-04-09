@@ -29,7 +29,7 @@ const AboutMe = () => {
 							<h4 className="font-semibold mb-2">My expertise includes:</h4>
 							<ul className="grid grid-cols-1 md:grid-cols-2 gap-2 p-4 mx-3">
 								{expertise.map((i) => (
-									<li className="flex items-center gap-2">
+									<li key={i} className="flex items-center gap-2">
 										<span className="w-2 h-2 bg-primary rounded-full"></span>
 										{i}
 									</li>

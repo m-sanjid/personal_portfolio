@@ -161,10 +161,9 @@ const Resume = () => {
           className="bg-black/10 dark:bg-white/10 backdrop-blur-md p-3 w-full rounded-md flex gap-2"
         >
           {tabs.map((i, id) => (
-            <>
+            <div key={id}>
               <motion.button
                 onMouseEnter={() => setHoveredIndex(id)}
-                key={i.id}
                 onClick={() => setActiveTab(i.id)}
                 className={`relative p-1 text-xs md:text-lg md:p-4 md:mx-3 rounded-md cursor-pointer ${activeTab == i.id ? "dark:bg-white/30 bg-black/30" : "bg-white/10"}`}
               >
@@ -176,7 +175,7 @@ const Resume = () => {
                   />
                 )}
               </motion.button>
-            </>
+            </div>
           ))}
         </div>
         <div>

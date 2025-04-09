@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import Logo from "./Logo";
-import { ThemeToggle } from "./ThemeToggle";
+import Logo from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { IconMenu, IconX } from "@tabler/icons-react";
 
 const Navbar = () => {
@@ -35,14 +35,14 @@ const Navbar = () => {
   return (
     <div className="relative flex justify-center">
       <nav
-        className={`fixed top-4 w-full z-50 ${isScrolled ? "rounded-lg bg-white/80 dark:bg-black/80 backdrop-blur-xl mx-10 max-w-4xl duration-300 ease-in-out px-10" : "max-w-7xl"}`}
+        className={`w-full z-50 ${isScrolled ? "rounded-lg bg-white/80 dark:bg-black/80 backdrop-blur-xl mx-10 max-w-4xl duration-300 ease-in-out px-10" : "max-w-7xl"}`}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto px-4 max-w-5xl">
           <div className="flex items-center justify-between h-16">
             <Logo />
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-4">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
@@ -113,8 +113,6 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
-
 export const navItems = [
   { path: "/", label: "Home" },
   { path: "/about", label: "About" },
@@ -123,3 +121,15 @@ export const navItems = [
   { path: "/snippets", label: "Snippets" },
   { path: "/contact", label: "Contact" },
 ];
+
+
+// Example usage
+const Demo = () => {
+  return (
+    <div className="space-y-4">
+      <Navbar/>
+    </div>
+  );
+};
+
+export default Demo;
