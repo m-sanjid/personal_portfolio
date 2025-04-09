@@ -1,137 +1,138 @@
-import { motion } from "motion/react";
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { motion, useAnimationControls } from "motion/react";
+import { User, Quote } from "lucide-react";
+import { testimonials } from "@/lib/Constants";
 
-interface Testimonial {
-  id: number;
-  name: string;
-  role: string;
-  company: string;
-  content: string;
-  avatar: string;
-}
 
 const TestimonialsSection = () => {
-  const testimonials: Testimonial[] = [
-    {
-      id: 1,
-      name: "Sarah Johnson",
-      role: "Product Manager",
-      company: "TechCorp",
-      content: "Muhammed is an exceptional developer who delivered our project ahead of schedule. His attention to detail and problem-solving skills are impressive. We'll definitely work with him again.",
-      avatar: "https://randomuser.me/api/portraits/women/32.jpg",
-    },
-    {
-      id: 2,
-      name: "David Chen",
-      role: "CTO",
-      company: "StartupX",
-      content: "Working with Muhammed was a great experience. He understood our requirements perfectly and implemented solutions that exceeded our expectations. His technical knowledge is outstanding.",
-      avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-    },
-    {
-      id: 3,
-      name: "Emily Rodriguez",
-      role: "Design Lead",
-      company: "CreativeStudio",
-      content: "Muhammed has a rare combination of technical expertise and design sensibility. He transformed our concepts into a beautiful, functional application that our users love.",
-      avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-    },
-  ];
+  
+  // Double the testimonials array to create seamless infinite scroll effect
+  const repeatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+  
+  const [isHovering, setIsHovering] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimationControls();
+  
+  // Animation speed based on hover state
+  const animationDuration = isHovering ? 30 : 15; 
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const nextTestimonial = () => {
-    setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-  };
+  useEffect(() => {
+    controls.start({
+      x: ["0%", "-33.333%"],
+      transition: {
+        x: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: animationDuration,
+          ease: "linear",
+        }
+      }
+    });
+  }, [controls, isHovering, animationDuration]);
 
   return (
-    <section className="py-20">
+    <section className="py-16">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">What People Say</h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Here's what clients and colleagues have to say about working with me.
+        {/* Header */}
+        <div className="text-center mb-12">
+          <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-3">
+            TESTIMONIALS
+          </span>
+          <h2 className="text-3xl font-bold mb-3">What Clients Say</h2>
+          <p className="text-muted-foreground max-w-lg mx-auto">
+            Explore feedback from satisfied clients who have trusted me with their projects
           </p>
-        </motion.div>
+        </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            <div className="absolute -left-8 top-1/2 -translate-y-1/2 z-10">
-              <button
-                onClick={prevTestimonial}
-                className="p-2 rounded-full bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 transition-colors"
-                aria-label="Previous testimonial"
-              >
-                <ChevronLeft size={24} />
-              </button>
-            </div>
-
-            <div className="overflow-hidden">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white/10 dark:bg-black/20 backdrop-blur-md rounded-lg p-8 md:p-10"
-              >
-                <div className="flex justify-center mb-6">
-                  <div className="relative">
-                    <Quote size={40} className="absolute -top-4 -left-4 text-primary opacity-20" />
-                    <img
-                      src={testimonials[activeIndex].avatar}
-                      alt={testimonials[activeIndex].name}
-                      className="w-20 h-20 rounded-full object-cover border-2 border-primary"
-                    />
-                  </div>
-                </div>
-
-                <blockquote className="text-center mb-6">
-                  <p className="text-lg italic mb-4">"{testimonials[activeIndex].content}"</p>
-                  <footer>
-                    <div className="font-bold text-lg">{testimonials[activeIndex].name}</div>
-                    <div className="text-muted-foreground">
-                      {testimonials[activeIndex].role} at {testimonials[activeIndex].company}
+        {/* Flowing Testimonials Container */}
+        <div className="relative max-w-6xl mx-auto overflow-hidden rounded-xl">
+          {/* vignette */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-secondary via-secondary/20 to-transparent pointer-events-none"></div>
+          <div className="absolute right-0 left-0 bottom-0 h-24 z-10 bg-gradient-to-t from-secondary via-secondary/20 to-transparent pointer-events-none"></div>
+          <div className="absolute left-0 top-0 right-0 h-24 z-10 bg-gradient-to-b from-secondary via-secondary/20 to-transparent pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-secondary via-secondary/20 to-transparent pointer-events-none"></div>
+          
+          {/* Testimonials Container */}
+          <div 
+            ref={containerRef}
+            className="py-6 overflow-hidden"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            <motion.div 
+              className="flex"
+              animate={controls}
+            >
+              {repeatedTestimonials.map((testimonial, index) => (
+                <motion.div 
+                  key={`${testimonial.id}-${index}`}
+                  className="flex-shrink-0 w-80 px-4"
+                  whileHover={{ 
+                    scale: 1.03,
+                    transition: { duration: 0.3 } 
+                  }}
+                >
+                  <motion.div 
+                    className="bg-primary/10 h-[18rem] flex flex-col justify-between backdrop-blur-md rounded-xl p-6 shadow-lg relative overflow-hidden border border-slate-200 dark:border-slate-700"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {/* Background Effects */}
+                    <div className="absolute inset-0 blur-xs">
+                    <div className="absolute top-30 left-0 w-[40rem] h-2 bg-gradient-to-t z-10 from-transparent via-primary/70 to-transparent" />
+                    <div className="absolute -top-6 -left-8 bg-secondary rounded-full w-32 h-32"/>
+                    <div className="absolute -top-6 -left-8 bg-secondary rounded-full w-32 h-32"/>
+                    <div className="absolute -bottom-12 -left-2 bg-secondary rounded-full w-32 h-32"/>
+                    <div className="absolute -bottom-6 -right-8 bg-secondary rounded-full w-32 h-32"/>
                     </div>
-                  </footer>
-                </blockquote>
+                    {/* Quote icon */}
+                    <div className="absolute -top-2 -right-2 text-primary">
+                      <Quote size={60} />
+                    </div>
 
-                <div className="flex justify-center gap-2 mt-6">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setActiveIndex(index)}
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        index === activeIndex ? "bg-primary" : "bg-black/20 dark:bg-white/20"
-                      }`}
-                      aria-label={`Go to testimonial ${index + 1}`}
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            </div>
+                       {/* Testimonial content */}
+                       <p className="text-primary/80 text-sm relative z-10 mt-6">
+                      &quot;{testimonial.content}&quot;
+                      </p>
 
-            <div className="absolute -right-8 top-1/2 -translate-y-1/2 z-10">
-              <button
-                onClick={nextTestimonial}
-                className="p-2 rounded-full bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 transition-colors"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight size={24} />
-              </button>
-            </div>
+                    {/* Avatar and info */}
+                    <div className="relative">
+
+                    <div className="flex items-center mt-4 relative z-10">
+                      <div className="mr-3">
+                        {/* {testimonial.image ? (
+                          <div className="relative">
+                          <div className="absolute inset-0 bg-primary/30 rounded-full blur-md"></div>
+                          <img 
+                          // src={testimonial.image} 
+                          // alt={testimonial.name} 
+                          className="w-14 h-14 rounded-full object-cover border-2 border-white dark:border-slate-700 relative"
+                          />
+                          </div>
+                          ) : ( */}
+                          <div className="relative">
+                            <div className="absolute inset-0 bg-primary/30 rounded-full blur-md"></div>
+                            <div className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center border-2 border-white dark:border-slate-700 relative">
+                              <User size={20} className="text-primary" />
+                            </div>
+                          </div>
+                        {/* )} */}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-lg leading-tight">{testimonial.name}</h3>
+                        <p className="text-xs text-muted-foreground">
+                          {testimonial.role} at <span className="font-medium">{testimonial.company}</span>
+                        </p>
+                 
+                      </div>
+                    </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </div>
@@ -139,4 +140,4 @@ const TestimonialsSection = () => {
   );
 };
 
-export default TestimonialsSection; 
+export default TestimonialsSection;
