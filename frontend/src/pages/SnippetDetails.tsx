@@ -31,7 +31,9 @@ const SnippetDetails = () => {
         setSnippet(loadedSnippet);
         const relatedSnippets = await getAllSnippets();
         setRelatedSnippets(
-          relatedSnippets.filter((snippet) => snippet.slug !== slug).slice(0, 3)
+          relatedSnippets
+            .filter((snippet) => snippet.slug !== slug)
+            .slice(0, 3),
         );
         console.log("Loaded snippet:", loadedSnippet);
       } catch (err) {
@@ -309,7 +311,7 @@ const SnippetDetails = () => {
         {/* Related components */}
         <div className="mt-12">
           <h2 className="text-xl font-bold mb-4">Related Components</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
             {relatedSnippets.map((relatedSnippet) => (
               <a
                 href={`/snippets/${relatedSnippet.slug}`}

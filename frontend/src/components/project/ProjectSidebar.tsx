@@ -131,9 +131,8 @@ const ProjectSidebar = ({ project }: ProjectSidebarProps) => {
               whileHover={{
                 scale: 1.05,
                 backgroundColor: "var(--primary)",
-                color: "white",
               }}
-              className="px-4 py-1.5 bg-secondary/5 text-secondary-foreground text-sm rounded-full cursor-pointer"
+              className="px-4 py-1.5 bg-white/10 hover:text-secondary transition-colors duration-150 text-primary text-sm rounded-full cursor-pointer"
             >
               {tech}
             </motion.span>

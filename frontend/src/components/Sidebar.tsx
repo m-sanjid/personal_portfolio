@@ -81,9 +81,8 @@ const Sidebar = ({ className, currentSlug }: SidebarProps) => {
                   >
                     <Link
                       to={`/snippets/${snippet.slug}`}
-                      className={`flex px-3 py-2 rounded-md text-sm transition-colors transition-duration-300 ${
-                        isActive ? "font-bold" : ""
-                      } ${isHovered && hoveredIndex === index ? "text-primary" : "text-muted-foreground"}`}
+                      className={`flex px-3 py-2 rounded-md text-sm transition-colors transition-duration-300 ${isActive ? "font-bold text-primary" : ""
+                        } ${isHovered && hoveredIndex === index ? "text-primary" : "text-muted-foreground"}`}
                     >
                       <span className="truncate">{snippet.title}</span>
                       {isHovered && hoveredIndex === index && (
@@ -109,7 +108,7 @@ const Sidebar = ({ className, currentSlug }: SidebarProps) => {
           <div className="text-sm text-neutral-500 dark:text-neutral-400">
             <p className="mb-2">Need help with snippets?</p>
             <Link
-              to="/documentation"
+              to="#"
               className="text-blue-600 dark:text-blue-400 hover:underline flex items-center text-sm"
             >
               <IconHelp size={16} className="mr-1 flex-shrink-0" />
