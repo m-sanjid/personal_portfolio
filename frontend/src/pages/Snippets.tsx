@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "motion/react";
 import ComponentCard from "@/components/ComponentCard";
 import { Snippet } from "@/types";
 import Sidebar from "@/components/Sidebar";
-import MoreComponentButton from "@/components/MoreComponentButton";
 import { AnimatedButton } from "@/components/AnimatedButton";
 
 const Snippets = () => {
