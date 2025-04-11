@@ -11,7 +11,7 @@ const BorderEffect = ({ text }: { text: string }) => {
           whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 1, ease: "easeInOut" }}
-          className="border-2 border-neutral-200 dark:border-neutral-800 absolute inset-0 rounded-md p-4"
+          className="border-2 border-neutral-600 dark:border-neutral-800 absolute inset-0 rounded-md p-4"
         >
           {/* Text Animation */}
           <motion.h1
@@ -19,7 +19,7 @@ const BorderEffect = ({ text }: { text: string }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: 1.1, duration: 1 }}
-            className="text-lg text-center break-words"
+            className="text-lg text-center break-words text-primary"
           >
             {text}
           </motion.h1>
@@ -38,7 +38,7 @@ const BorderEffect = ({ text }: { text: string }) => {
             whileInView={{ scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: 1.3 + index * 0.1, duration: 0.4 }}
-            className={`absolute h-2 w-2 bg-neutral-200 dark:bg-neutral-800 ${position} rounded-full`}
+            className={`absolute h-2 w-2 bg-neutral-600 dark:bg-neutral-800 ${position} rounded-full`}
           />
         ))}
       </div>

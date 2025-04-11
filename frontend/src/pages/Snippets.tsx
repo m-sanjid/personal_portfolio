@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import ComponentCard from "@/components/ComponentCard";
 import { Snippet } from "@/types";
 import Sidebar from "@/components/Sidebar";
+import { AnimatedButton } from "@/components/AnimatedButton";
 
 const Snippets = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -220,6 +221,9 @@ const Snippets = () => {
             </motion.div>
           )}
         </AnimatePresence>
+        <div className="w-full flex items-center justify-center mb-4">
+          <AnimatedButton label="More components" to="/snippets" className="px-4 py-2 border rounded-md bg-primary text-secondary" />
+        </div>
       </motion.div>
     </div>
   );
