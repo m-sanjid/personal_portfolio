@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 const Certificates = () => {
   return (
     <div className="w-full h-full bg-black/10 dark:bg-white/10 backdrop-blur-md p-4 rounded-md">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-10">
+      <div className="grid grid-cols-1 mx-4 gap-2 mb-10">
         {Certifications.map((c, idx) => (
           <motion.a
             initial={{ opacity: 0, y: 10 }}

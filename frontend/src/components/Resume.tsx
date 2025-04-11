@@ -53,11 +53,11 @@ const Experience = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex items-center gap-2 mt-4">
+              <div className="items-center gap-2 mt-4 grid grid-cols-3 md:grid-cols-6">
                 {i.skill.map((s) => (
                   <div
                     key={s}
-                    className="px-2 py-1 bg-white/10 backdrop-blur-md rounded-md"
+                    className="px-2 py-1 bg-white/10 backdrop-blur-md rounded-md flex items-center"
                   >
                     {s}
                   </div>
