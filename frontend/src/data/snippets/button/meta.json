@@ -1,10 +1,10 @@
 {
   "title": "Button Component",
-  "description": "A versatile button component with multiple variants, sizes, and states. Built with Framer Motion for smooth animations and transitions.",
+  "description": "A versatile button component with multiple variants, sizes, and states. Built with Motion/react(formerly Framer Motion) for smooth animations and transitions.",
   "tags": [
     "React",
     "TypeScript",
-    "Framer Motion",
+    "Motion/react", 
     "Tailwind CSS"
   ],
   "author": "Muhammed Sanjid",
