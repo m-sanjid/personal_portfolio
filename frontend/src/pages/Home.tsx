@@ -5,7 +5,6 @@ import Contact from "./Contact";
 import { ResumeButton } from "@/components/Resume";
 import { useScroll, useMotionValueEvent } from "motion/react";
 import { useState } from "react";
-import TestimonialsSection from "@/components/TestimonialsSection";
 
 const Home = () => {
   const { scrollY } = useScroll();
@@ -21,7 +20,6 @@ const Home = () => {
       <ProjectsSection id="projects" />
       <SkillsSection id="skills" />
       <Contact id="contact" />
-      <TestimonialsSection />
       <div
         className="fixed top-20 z-10 hidden md:block"
         style={{

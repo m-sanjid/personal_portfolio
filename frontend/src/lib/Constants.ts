@@ -56,34 +56,37 @@ pull requests, repos, and issues, Dev Stats creates stunning dashboards, timelin
     technologies: ["Nextjs", "tailwindcss", "typescript"],
     createdAt: "2024-01-01",
     stats: {
-      stars: 100,
-      forks: 50,
-      watchers: 20,
+      stars: 1,
+      forks: 0,
+      watchers: 0,
     },
   },
   {
     id: "befit-ai",
     title: "BefitAI",
     description: `BefitAI is an AI-powered meal planner that helps fitness enthusiasts create personalized meal plans based on their goals, preferences, and dietary restrictions. With features like custom meal templates, ingredient tracking, and nutritional analysis, BefitAI empowers users to make healthier choices and reach their fitness objectives more effectively.`,
-    image: "befit.png",
+    image: "https://res.cloudinary.com/dpvmgvusp/image/upload/v1746350885/Screenshot_2025-05-04_at_2.55.46_PM_x1vbng.png",
     tags: ["Nextjs", "tailwindcss", "typescript", "openai"],
     liveLink: "https://befitai.sanjid.shop",
     githubLink: "https://github.com/m-sanjid/befit-ai",
     logo: "assets/befit.png",
     longDescription: `BefitAI is an AI-powered meal planner that helps fitness enthusiasts create personalized meal plans based on their goals, preferences, and dietary restrictions. With features like custom meal templates, ingredient tracking, and nutritional analysis, BefitAI empowers users to make healthier choices and reach their fitness objectives more effectively.`,
-    screenshots: ["befit.png"],
+    screenshots: ["https://res.cloudinary.com/dpvmgvusp/image/upload/v1746350885/Screenshot_2025-05-04_at_2.55.46_PM_x1vbng.png",
+      "https://res.cloudinary.com/dpvmgvusp/image/upload/v1746350877/Screenshot_2025-05-04_at_2.57.25_PM_ydyptg.png", 
+      "https://res.cloudinary.com/dpvmgvusp/image/upload/v1746350886/Screenshot_2025-05-04_at_2.56.53_PM_k5f4fi.png"
+    ],
     features: [
       "AI-powered meal planning",
       "Custom meal templates",
       "Ingredient tracking",
       "Nutritional analysis",
     ],
-    technologies: ["Nextjs", "tailwindcss", "typescript", "openai"],
+    technologies: ["Nextjs", "tailwindcss", "typescript", "gemini-ai"],
     createdAt: "2024-01-01",
     stats: {
-      stars: 100,
-      forks: 50,
-      watchers: 20,
+      stars: 1,
+      forks: 0,
+      watchers: 0,
     },
   },
 ];
@@ -142,8 +145,8 @@ export const testimonials: Testimonial[] = [
 //TODO:change it to real projects
 export const featuredProjects: Project[] = [
   {
-    id: "e-commerce-platform",
-    title: "E-Commerce Platform",
+    id: "dev_stats",
+    title: "Dev Stats",
     description:
       "A full-featured online store with payment processing and inventory management",
     longDescription:
@@ -190,36 +193,11 @@ export const featuredProjects: Project[] = [
     technologies: ["Next.js", "TypeScript", "PostgreSQL", "Socket.io"],
     createdAt: "2023-02-15",
     stats: {
-      stars: 75,
-      forks: 30,
-      watchers: 15,
+      stars: 1,
+      forks: 0,
+      watchers: 0,
     },
-  },
-  {
-    id: "portfolio-website",
-    title: "Portfolio Website",
-    description:
-      "A modern, responsive portfolio website showcasing projects and skills.",
-    longDescription:
-      "A modern, responsive portfolio website showcasing projects and skills. Built with React, TailwindCSS, and Motion.",
-    tags: ["React", "TailwindCSS", "Motion"],
-    logo: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1055&q=80",
-    image:
-      "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1055&q=80",
-    screenshots: [
-      "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1055&q=80",
-    ],
-    liveLink: "https://github.com/example/portfolio",
-    githubLink: "https://github.com/example/portfolio",
-    features: ["Responsive design", "Project showcase", "Skills section"],
-    technologies: ["React", "TailwindCSS", "Motion"],
-    createdAt: "2023-03-20",
-    stats: {
-      stars: 50,
-      forks: 20,
-      watchers: 10,
-    },
-  },
+  }
 ];
 
 export const projectsData: Project[] = [

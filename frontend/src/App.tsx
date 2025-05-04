@@ -8,7 +8,6 @@ import Snippets from "./pages/Snippets";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
-import Blog from "./pages/Blog";
 import Test from "./components/Test";
 import ProjectDetail from "./pages/ProjectDetails";
 import SnippetDetails from "./pages/SnippetDetails";
@@ -31,7 +30,6 @@ const MainLayout = () => {
         <Route path="/projects/:id" element={<ProjectDetail />} />
         <Route path="/snippets" element={<Snippets />} />
         <Route path="/snippets/:slug" element={<SnippetDetails />} />
-        <Route path="/blog" element={<Blog />} />
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

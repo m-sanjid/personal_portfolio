@@ -3,7 +3,7 @@ import { AnimatedButton } from "./AnimatedButton";
 import { IconBrandGithub, IconExternalLink } from "@tabler/icons-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { featuredProjects } from "@/lib/Constants";
+import { projectList } from "@/lib/Constants";
 import { Project } from "@/types";
 
 const ProjectsSection = ({ id }: { id: string }) => {
@@ -28,7 +28,7 @@ const ProjectsSection = ({ id }: { id: string }) => {
         </motion.div>
 
         <div className="relative">
-          {featuredProjects.map((project, index) => (
+          {projectList.map((project, index) => (
             <FeaturedProjectCard key={index} project={project} />
           ))}
         </div>
