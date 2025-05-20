@@ -227,13 +227,13 @@ const SnippetDetails = () => {
             className="mb-12"
           >
             {activeTab === "Preview" && (
-              <div className="py-8 px-4 flex justify-center h-[26rem] items-center border border-neutral-200 dark:border-neutral-800 rounded-lg bg-white dark:bg-neutral-900 overflow-auto max-w-4xl mx-auto">
+              <div className="py-8 px-4 flex justify-center h-screen items-center border border-neutral-200 dark:border-neutral-800 rounded-lg bg-white dark:bg-neutral-900 overflow-hidden max-w-4xl mx-auto">
                 {Demo && <Demo />}
               </div>
             )}
 
             {activeTab === "Code" && (
-              <div className="relative h-[26rem] bg-neutral-500 w-full max-w-4xl mx-auto overflow-auto p-2 border rounded-2xl">
+              <div className="relative h-[26rem] bg-neutral-500 dark:bg-neutral-800 w-full max-w-4xl mx-auto overflow-auto p-2 border rounded-2xl">
                 <pre className="whitespace-pre-wrap font-mono text-sm text-white">
                   <code>{snippet.code}</code>
                 </pre>
@@ -321,7 +321,7 @@ const SnippetDetails = () => {
                 <div className="p-4 border-b">
                   <h3 className="font-medium">{relatedSnippet.title}</h3>
                 </div>
-                <div className="p-4 h-44 flex items-center justify-center bg-card">
+                <div className="p-4 h-44 flex items-center justify-center bg-card overflow-auto">
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}

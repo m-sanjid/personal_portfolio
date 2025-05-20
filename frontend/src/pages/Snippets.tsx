@@ -57,14 +57,14 @@ const Snippets = () => {
 
   return (
     <div className="flex relative">
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <Sidebar />
       </div>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col w-full max-w-5xl mx-auto p-4 sm:ml-64 md:px-4"
+        className="flex flex-col w-full max-w-5xl mx-auto p-4 md:ml-64 md:px-4"
       >
         <div className="mb-8">
           <motion.h1
