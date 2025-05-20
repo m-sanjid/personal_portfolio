@@ -21,7 +21,7 @@ const Home = () => {
       <SkillsSection id="skills" />
       <Contact id="contact" />
       <div
-        className="fixed top-20 z-10 hidden md:block"
+        className="fixed bottom-10 right-10 z-10 hidden md:block"
         style={{
           opacity: isScrolled ? 1 : 0,
           transition: "opacity 0.5s ease-in-out",

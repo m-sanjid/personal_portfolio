@@ -21,9 +21,8 @@ const Navbar = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleHover = (e: any) => {
-    const { offsetLeft, offsetWidth } = e.target;
+  const handleHover = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const { offsetLeft, offsetWidth } = e.currentTarget;
     setHoverPositon({ left: offsetLeft, width: offsetWidth });
     setIsHovered(true);
   };
@@ -89,7 +88,7 @@ const Navbar = () => {
 
           {/* Mobile Menu */}
           {isOpen && (
-            <div className="md:hidden absolute top-16 left-0 w-full animate-fade-in">
+            <div className="md:hidden absolute top-16 left-0 w-full animate-fade-in bg-white dark:bg-black">
               <div className="px-4 py-2 space-y-2">
                 {navItems.map((item) => (
                   <Link

@@ -3,7 +3,7 @@ import { IconArrowRight, IconHelp, IconLoader2 } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import { Snippet } from "@/types";
 import { getAllSnippets } from "@/lib/loadSnippets";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 interface SidebarProps {
   className?: string;
@@ -35,7 +35,7 @@ const Sidebar = ({ className, currentSlug }: SidebarProps) => {
 
   return (
     <motion.aside
-      className={`fixed top-0 bottom-0 w-64 pt-20 z-20 hidden md:block ${className}`}
+      className={`fixed top-0 bottom-0 w-64 pt-20 z-20 hidden md:block bg-secondary ${className}`}
     >
       <div className="h-full border-r border-neutral-200 dark:border-neutral-800 bg-inherit flex flex-col">
         <div className="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-800">
@@ -81,8 +81,13 @@ const Sidebar = ({ className, currentSlug }: SidebarProps) => {
                   >
                     <Link
                       to={`/snippets/${snippet.slug}`}
-                      className={`flex px-3 py-2 rounded-md text-sm transition-colors transition-duration-300 ${isActive ? "font-bold text-primary" : ""
-                        } ${isHovered && hoveredIndex === index ? "text-primary" : "text-muted-foreground"}`}
+                      className={`flex px-3 py-2 rounded-md text-sm transition-colors transition-duration-300 ${
+                        isActive ? "font-bold text-primary" : ""
+                      } ${
+                        isHovered && hoveredIndex === index
+                          ? "text-primary"
+                          : "text-muted-foreground"
+                      }`}
                     >
                       <span className="truncate">{snippet.title}</span>
                       {isHovered && hoveredIndex === index && (
@@ -105,14 +110,27 @@ const Sidebar = ({ className, currentSlug }: SidebarProps) => {
         </nav>
 
         <div className="border-t border-neutral-200 dark:border-neutral-800 p-4">
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              exit={{ opacity: 0, x: -40 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-primary text-secondary p-2 rounded-md mb-20"
+            >
+              New Component Library Coming Soon
+            </motion.div>
+          </AnimatePresence>
           <div className="text-sm text-neutral-500 dark:text-neutral-400">
-            <p className="mb-2">Need help with snippets?</p>
+            <p className="mb-2">Need Custom Component or Website?</p>
             <Link
-              to="#"
+              to="/contact"
               className="text-blue-600 dark:text-blue-400 hover:underline flex items-center text-sm"
             >
               <IconHelp size={16} className="mr-1 flex-shrink-0" />
-              <span className="truncate">View documentation</span>
+              <span className="truncate">View Contact</span>
             </Link>
           </div>
         </div>
