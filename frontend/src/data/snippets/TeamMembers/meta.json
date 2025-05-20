@@ -1,0 +1,16 @@
+{
+  "title": "Team Members Component",
+  "description": "A responsive team members component with expandable view and smooth animations. Built with Motion/react(formerly Framer Motion) for smooth animations and transitions.",
+  "tags": [
+    "React",
+    "TypeScript",
+    "Motion/react",
+    "Tailwind CSS"
+  ],
+  "author": "Muhammed Sanjid",
+  "createdAt": "2025-05-20",
+  "downloads": 2,
+  "likes": 2,
+  "language": "tsx",
+  "usage": "import TeamMembers from '@/components/TeamMembers';\n\n// Basic usage\n<TeamMembers teamMembers={TeamMembers} /> \n give Members data in this format interface TeamMember {\n     id: number;\n  name: string;\n  role: string;\n  bio: string;\n  image: string;\n  socials: {\n    linkedin: string;\n    github: string;\n    twitter: string;\n    mail: string;\n  }\n props: {\n    teamMembers: TeamMember[];\n  }"
+}
